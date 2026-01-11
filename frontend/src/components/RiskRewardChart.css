@@ -1,0 +1,131 @@
+.risk-reward-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.risk-metrics-card,
+.trade-history-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.risk-metrics-card h2,
+.trade-history-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid #00796b;
+  padding-bottom: 10px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+.metric-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: #00796b;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.history-table-container {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.history-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.history-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.history-table .symbol {
+  font-weight: 600;
+  color: #00796b;
+}
+
+.action-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+}
+
+.action-badge.buy {
+  background-color: #4caf50;
+}
+
+.action-badge.sell {
+  background-color: #f44336;
+}
+
+.no-data {
+  color: #999;
+  font-style: italic;
+  padding: 20px 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .history-table {
+    font-size: 13px;
+  }
+  
+  .history-table th,
+  .history-table td {
+    padding: 8px;
+  }
+}
