@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
@@ -12,6 +12,31 @@ function Portfolio() {
   const [transactions, setTransactions] = useState([]);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+
+  const loadSummary = useCallback(async () => {
+    try {
+      const response = await axios.get(`${API_URL}/portfolio/${portfolioId}/summary`);
+      setSummary(response.data);
+      setError('');
+    } catch (err) {
+      // Portfolio might not exist yet
+      console.log('Portfolio not found, create one first');
+    }
+  }, [portfolioId]);
+
+  const loadTransactions = useCallback(async () => {
+    try {
+      const response = await axios.get(`${API_URL}/portfolio/${portfolioId}/transactions`);
+      setTransactions(response.data.transactions);
+    } catch (err) {
+      console.log('No transactions yet');
+    }
+  }, [portfolioId]);
+
+  useEffect(() => {
+    loadSummary();
+    loadTransactions();
+  }, [loadSummary, loadTransactions]);
 
   const createPortfolio = async () => {
     try {
@@ -69,31 +94,6 @@ function Portfolio() {
       setError('Failed to execute sell order');
     }
   };
-
-  const loadSummary = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/portfolio/${portfolioId}/summary`);
-      setSummary(response.data);
-      setError('');
-    } catch (err) {
-      // Portfolio might not exist yet
-      console.log('Portfolio not found, create one first');
-    }
-  };
-
-  const loadTransactions = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/portfolio/${portfolioId}/transactions`);
-      setTransactions(response.data.transactions);
-    } catch (err) {
-      console.log('No transactions yet');
-    }
-  };
-
-  React.useEffect(() => {
-    loadSummary();
-    loadTransactions();
-  }, []);
 
   return (
     <div>
