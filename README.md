@@ -1,0 +1,2 @@
+# nordnet-trading-simulator
+Trading
